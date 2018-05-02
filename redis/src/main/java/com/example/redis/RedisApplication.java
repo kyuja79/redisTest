@@ -27,7 +27,7 @@ public class RedisApplication {
 			GeoOperations<String, String> geo = rt.opsForGeo();
 			geo.add("Sicily", new Point(13.361389, 38.1155556), "Arigento");
 			geo.add("Sicily", new Point(15.087269, 37.502669), "Catania");
-			geo.add("Sicily", new Point(13.583333, 37.316667), "Arigento");
+			geo.add("Sicily", new Point(13.583333, 37.316667), "Palermo");
 			
 			Circle circle = new Circle(new Point(13.583333, 37.316667),
 					new Distance(100, org.springframework.data.redis.connection.RedisGeoCommands.DistanceUnit.KILOMETERS));
