@@ -31,17 +31,12 @@ public class RedisApplication {
 	ApplicationRunner geography(RedisTemplate<String, String> rt) {
 		return titledRunner("geography", args -> {
 			GeoOperations<String, String> geo = rt.opsForGeo();
-			geo.add("Sicily", new Point(13.361389, 38.1155556), "Arigento");
+			geo.add("Sicily", new Point(13.353664, 37.193878), "Agrigento");
 			geo.add("Sicily", new Point(15.087269, 37.502669), "Catania");
-			geo.add("Sicily", new Point(13.583333, 37.316667), "Palermo");
+			geo.add("Sicily", new Point(13.361389, 38.115556), "Palermo");
 			
-			Circle circle_100 = new Circle(new Point(13, 37),
+			Circle circle_100 = new Circle(new Point(15, 37),
 					new Distance(100, org.springframework.data.redis.connection.RedisGeoCommands.DistanceUnit.KILOMETERS));
-			
-
-			Circle circle_200 = new Circle(new Point(13, 37),
-					new Distance(200, org.springframework.data.redis.connection.RedisGeoCommands.DistanceUnit.KILOMETERS));
-			
 			GeoResults<org.springframework.data.redis.connection.RedisGeoCommands.GeoLocation<String>> geoResults_100 = geo.radius("Sicily", circle_100);
 			System.out.println("geoResults_100 : ");
 			/**
@@ -51,6 +46,12 @@ public class RedisApplication {
 				.getContent()
 				.forEach(c -> System.out.println(c.toString()));
 			
+			
+			/**
+			 * find 150 km geo point
+			 */
+			Circle circle_200 = new Circle(new Point(15, 37),
+					new Distance(150, org.springframework.data.redis.connection.RedisGeoCommands.DistanceUnit.KILOMETERS));
 			GeoResults<org.springframework.data.redis.connection.RedisGeoCommands.GeoLocation<String>> geoResults_200 = geo.radius("Sicily", circle_200);
 			System.out.println("geoResults_200 : ");
 			geoResults_200
